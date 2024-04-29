@@ -37,8 +37,8 @@
                             <td>{{ $post->user->name }}</td>
                             <td>{{ $post->title }}</td>
                             <td>{{ $post->comments[0]->id }}</td>
-                            <td>{{ $post->created_at->diffForHumans() }}</td>
-                            <td>{{ $post->updated_at->diffForHumans() }}</td>
+                            <td>{{ $post->created_at }}</td>
+                            <td>{{ $post->updated_at }}</td>
                         </tr>
                     @endforeach
                 </tbody>

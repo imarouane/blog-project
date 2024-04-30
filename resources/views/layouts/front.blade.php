@@ -7,7 +7,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>illuminate</title>
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="{{ $mastHeadFavicon }}" />
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->
@@ -25,7 +25,7 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
         <div class="container px-4 px-lg-5">
-            <a class="navbar-brand fs-3 fw-semibold" href="{{ route('home') }}">illuminate</a>
+            <a class="navbar-brand fs-3 fw-semibold" href="{{ route('home') }}">IllumIns</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 Menu
@@ -63,7 +63,18 @@
         </div>
     </nav>
     <!-- Page Header-->
-    @yield('header')
+    <header class="masthead" style="background-image: url({{ $mastHeadBg }})">
+        <div class="container position-relative px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <div class="site-heading">
+                        <h1>{{ $mastHeadTitle }}</h1>
+                        <span class="subheading">{{ $mastHeadSubTitle }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
     <!-- Main Content-->
     <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
@@ -103,7 +114,7 @@
                             </a>
                         </li>
                     </ul>
-                    <div class="small text-center text-muted fst-italic">Copyright &copy; Your Website 2023</div>
+                    <div class="small text-center text-muted fst-italic">Copyright &copy; IlluminateInsights 2024</div>
                 </div>
             </div>
         </div>

@@ -28,8 +28,9 @@ class HomeController extends Controller
         return view('home', compact('posts'));
     }
 
-    public function show(Post $post)
+    public function show(Request $request, Post $post)
     {
+        // $post = Post::with(['comments', 'user'])->whereSlug($slug)->firstOrFail();
         return view('post', compact('post'));
     }
 

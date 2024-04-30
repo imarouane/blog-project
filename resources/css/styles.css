@@ -12593,3 +12593,7 @@ header.masthead .post-heading .meta a {
 .post-preview>a:hover>.post-content {
     color: #000;
 }
+
+a.text-danger.dropdown-item:active {
+    background-color: transparent;
+}

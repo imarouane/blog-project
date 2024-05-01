@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CustomLoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Auth;
@@ -21,4 +22,13 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/post/{post:slug}', 'show')->name('post.show');
     Route::get('/about', 'about')->name('about');
     Route::get('/contact', 'contact')->name('contact');
+});
+
+Route::controller(CustomLoginController::class)->group(function () {
+    Route::get('/custom-login', 'index')->name('custom.login');
+    Route::get('/custom-register', 'customRegister')->name('custom.register');
+    Route::get('/password-recovery-email', 'passwordRecoveryEmail')->name('password.recovery.email');
+    Route::post('/custom-login', 'customLogin')->name('custom.login.post');
+    Route::post('/custom-logout', 'customLogout')->name('custom.logout');
+    Route::post('/custom-reset', 'customReset')->name('custom.reset');
 });

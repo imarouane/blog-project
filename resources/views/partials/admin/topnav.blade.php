@@ -24,7 +24,7 @@
                     <hr class="dropdown-divider" />
                 </li>
                 <li class="nav-item">
-                    <form action="{{ route('logout') }}" method="post" id="logout-form-dashboard">
+                    <form action="{{ route('custom.logout') }}" method="post" id="logout-form-dashboard">
                         @csrf
                     </form>
                     <a onmouseover="this.style.backgroundColor='transparent'"

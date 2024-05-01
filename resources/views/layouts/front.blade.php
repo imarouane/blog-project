@@ -47,7 +47,7 @@
                             <a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ route('admin.dashboard.index') }}">Admin</a>
                         </li>
                         <li class="nav-item">
-                            <form action="{{ route('logout') }}" method="post" id="logout-form">
+                            <form action="{{ route('custom.logout') }}" method="post" id="logout-form">
                                 @csrf
                             </form>
                             <a class="nav-link px-lg-3 py-3 text-danger py-lg-4" href="#"
@@ -55,7 +55,7 @@
                         </li>
                     @else
                         <li class="nav-item">
-                            <a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ route('login') }}">Login</a>
+                            <a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ route('custom.login') }}">Login</a>
                         </li>
                     @endauth
                 </ul>

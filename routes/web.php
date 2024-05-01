@@ -28,7 +28,9 @@ Route::controller(CustomLoginController::class)->group(function () {
     Route::get('/custom-login', 'index')->name('custom.login');
     Route::get('/custom-register', 'customRegister')->name('custom.register');
     Route::get('/password-recovery-email', 'passwordRecoveryEmail')->name('password.recovery.email');
+    Route::get('/custom-password/reset/{token}', 'customPasswordReset')->name('custom.password.reset');
     Route::post('/custom-login', 'customLogin')->name('custom.login.post');
     Route::post('/custom-logout', 'customLogout')->name('custom.logout');
     Route::post('/custom-reset', 'customReset')->name('custom.reset');
+    Route::post('/custom-password/reset', 'customPasswordUpdate')->name('custom.password.update');
 });

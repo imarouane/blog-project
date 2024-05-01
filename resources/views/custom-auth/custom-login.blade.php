@@ -7,6 +7,11 @@
                 <h3 class="text-center font-weight-light my-4">Login</h3>
             </div>
             <div class="card-body">
+                @session('status')
+                    <div class="alert alert-success">
+                        {{ session('status') }}
+                    </div>
+                @endsession
                 @error('status')
                     <div class="alert alert-danger">
                         {{ $message }}

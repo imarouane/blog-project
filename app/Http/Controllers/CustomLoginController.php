@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
-use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Str;
 
 class CustomLoginController extends Controller
 {
@@ -23,6 +25,12 @@ class CustomLoginController extends Controller
     public function passwordRecoveryEmail()
     {
         return view('custom-auth.custom-passwords.password-recovery-email');
+    }
+
+    public function customPasswordReset(Request $request, $token)
+    {
+        $email = $request->query('email');
+        return view('custom-auth.custom-passwords.custom-password-reset', ['email' => $email, 'token' => $token]);
     }
 
     public function customLogin(Request $request)
@@ -60,6 +68,32 @@ class CustomLoginController extends Controller
             return back()->with(['status' => __($status)]);
         } else {
             return back()->withErrors(['email' => __($status)]);
+        }
+    }
+
+    public function customPasswordUpdate(Request $request)
+    {
+        $request->validate(
+            [
+                'email' => 'email|required',
+                'token' => 'required',
+                'password' => 'required|confirmed',
+                'password_confirmation' => 'required'
+            ]
+        );
+
+        $status = Password::reset($request->only('email', 'password', 'password_confiramtion', 'token'), function (User $user, $password) {
+            $user->forceFill([
+                'password' => Hash::make($password)
+            ])->setRememberToken(Str::random(20));
+
+            $user->save();
+        });
+
+        if ($status === Password::PASSWORD_RESET) {
+            return redirect()->route('custom.login')->with(['status' => __($status)]);
+        } else {
+            return back()->withErrors(['status' => __($status)]);
         }
     }
 }

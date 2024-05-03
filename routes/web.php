@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\CustomLoginController;
+use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Auth;
@@ -24,13 +24,14 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/contact', 'contact')->name('contact');
 });
 
-Route::controller(CustomLoginController::class)->group(function () {
-    Route::get('/custom-login', 'index')->name('custom.login');
-    Route::get('/custom-register', 'customRegister')->name('custom.register');
-    Route::get('/password-recovery-email', 'passwordRecoveryEmail')->name('password.recovery.email');
-    Route::get('/custom-password/reset/{token}', 'customPasswordReset')->name('custom.password.reset');
-    Route::post('/custom-login', 'customLogin')->name('custom.login.post');
+Route::controller(CustomAuthController::class)->group(function () {
+    Route::get('/custom-login', 'index')->name('custom.login')->middleware('guest');
+    Route::get('/custom-register', 'customRegisterIndex')->name('custom.show.register')->middleware('guest');
+    Route::post('/custom-register', 'customRegister')->name('custom.register')->middleware('guest');
+    Route::get('/password-recovery-email', 'passwordRecoveryEmail')->name('password.recovery.email')->middleware('guest');
+    Route::get('/custom-password/reset/{token}', 'customPasswordReset')->name('custom.password.reset')->middleware('guest');
+    Route::post('/custom-login', 'customLogin')->name('custom.login.post')->middleware('guest');
     Route::post('/custom-logout', 'customLogout')->name('custom.logout');
-    Route::post('/custom-reset', 'customReset')->name('custom.reset');
-    Route::post('/custom-password/reset', 'customPasswordUpdate')->name('custom.password.update');
+    Route::post('/custom-reset', 'customReset')->name('custom.reset')->middleware('guest');
+    Route::post('/custom-password/reset', 'customPasswordUpdate')->name('custom.password.update')->middleware('guest');
 });

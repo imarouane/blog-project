@@ -52,7 +52,7 @@
             </div>
             <div class="card-footer text-center py-3">
                 <div class="small">
-                    <a href="{{ route('custom.register') }}">Need an account? Sign up!</a>
+                    <a href="{{ route('custom.show.register') }}">Need an account? Sign up!</a>
                 </div>
             </div>
         </div>

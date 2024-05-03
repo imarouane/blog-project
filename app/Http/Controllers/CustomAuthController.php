@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 
-class CustomLoginController extends Controller
+class CustomAuthController extends Controller
 {
 
     public function index()
@@ -17,7 +18,7 @@ class CustomLoginController extends Controller
         return view('custom-auth.custom-login');
     }
 
-    public function customRegister()
+    public function customRegisterIndex()
     {
         return view('custom-auth.custom-register');
     }
@@ -25,6 +26,31 @@ class CustomLoginController extends Controller
     public function passwordRecoveryEmail()
     {
         return view('custom-auth.custom-passwords.password-recovery-email');
+    }
+
+    public function customRegister(Request $request)
+    {
+        $request->validate([
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|confirmed',
+            'password_confirmation' => 'required',
+        ]);
+
+        $inputs = $request->only('firstname', 'lastname', 'email', 'password', 'password_confirmation');
+
+        try {
+            $user = User::create($inputs);
+            Auth::login($user);
+            return redirect()->route('admin.dashboard.index');
+        } catch (QueryException $e) {
+            $errorCode = $e->errorInfo[1];
+            if ($errorCode === 1062) {
+                return redirect()->back()->withInput()->withErrors(['email' => 'The email address has already been taken.']);
+            }
+            return redirect()->back()->withInput()->withErrors(['error' => 'An error occurred while registering.']);
+        }
     }
 
     public function customPasswordReset(Request $request, $token)

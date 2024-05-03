@@ -13,7 +13,7 @@
                 <thead>
                     <tr>
                         <th>Id</th>
-                        <th>User Name</th>
+                        <th>Username</th>
                         <th>Title</th>
                         <th>Comment</th>
                         <th>Created Date</th>
@@ -23,7 +23,7 @@
                 <tfoot>
                     <tr>
                         <th>Id</th>
-                        <th>User Name</th>
+                        <th>Username</th>
                         <th>Title</th>
                         <th>Comment</th>
                         <th>Created Date</th>

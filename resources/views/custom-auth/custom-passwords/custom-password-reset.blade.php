@@ -19,11 +19,11 @@
                         <input name="email" class="form-control" id="inputEmail" type="email"
                             placeholder="name@example.com" value="{{ $email ?? old('email') }}" />
                         <label for="inputEmail">Email address</label>
-                        {{-- @error('email')
+                        @error('email')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
-                        @enderror --}}
+                        @enderror
                     </div>
                     <div class="form-floating mb-3">
                         <input name="password" class="form-control @error('password') is-invalid @enderror"
